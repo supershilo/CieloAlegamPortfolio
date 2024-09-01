@@ -136,7 +136,7 @@ elif st.session_state.selected_tab == "⭐ Skills":
             <iframe src="https://flo.uri.sh/visualisation/19252086/embed" 
                     width="50%" 
                     height="500" 
-                    style="border:none;margin-right: 300px" 
+                    style="border:none" 
                     scrolling="no">
             </iframe>
             <iframe src="https://flo.uri.sh/visualisation/19252332/embed" 
@@ -157,7 +157,7 @@ elif st.session_state.selected_tab == "📚 Interests":
         <div style='display: flex; justify-content: center;'>
             <iframe src="https://flo.uri.sh/visualisation/19252499/embed" 
                     width="100%" 
-                    height="1000" 
+                    height="500" 
                     style="border:none;" 
                     scrolling="no">
             </iframe>
