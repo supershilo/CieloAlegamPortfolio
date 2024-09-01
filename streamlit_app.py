@@ -1,7 +1,4 @@
 import streamlit as st
-import plotly.express as px
-import pandas as pd
-import altair as alt
 
 # Initialize selected_tab if it doesn't exist
 if 'selected_tab' not in st.session_state:
