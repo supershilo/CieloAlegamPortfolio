@@ -157,7 +157,7 @@ elif st.session_state.selected_tab == "📚 Interests":
         <div style='display: flex; justify-content: center;'>
             <iframe src="https://flo.uri.sh/visualisation/19252499/embed" 
                     width="100%" 
-                    height="500" 
+                    height="550" 
                     style="border:none;" 
                     scrolling="no">
             </iframe>
