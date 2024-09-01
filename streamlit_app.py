@@ -1,4 +1,7 @@
 import streamlit as st
+import plotly.express as px
+import pandas as pd
+import altair as alt
 
 # Initialize selected_tab if it doesn't exist
 if 'selected_tab' not in st.session_state:
@@ -42,6 +45,31 @@ st.markdown(
 
 # Define the tab options
 tabs = ["👧 Personal Details", "💗 Likes / Dislikes", "⭐ Skills", "📚 Interests", "🎖️ Educational Activities"]
+
+
+def get_skill_chart(use_container_width: bool):
+    # Define the data for programming languages and proficiency
+    source = pd.DataFrame({
+        "Programming Language": ["C", "Java", "Python", "HTML/CSS", "Javascript"],
+        "Proficiency": [77, 90, 80, 98, 85]
+    })
+
+    # Create the base of the radial chart
+    base = alt.Chart(source).encode(
+        theta=alt.Theta("Proficiency:Q", stack=True),
+        radius=alt.Radius("Proficiency", scale=alt.Scale(type="sqrt", zero=True, rangeMin=20)),
+        color="Programming Language:N",
+    )
+
+    # Create the chart with arcs and text
+    c1 = base.mark_arc(innerRadius=20, stroke="#fff")
+    c2 = base.mark_text(radiusOffset=10).encode(text="Proficiency:Q")
+
+    # Combine the arc and text
+    chart = c1 + c2
+
+
+    st.altair_chart(chart, theme=None, use_container_width=True)
 
 # Create a dropdown for selecting the tab
 selected_tab = st.selectbox("Navigate to:", tabs, index=tabs.index(st.session_state.selected_tab))
@@ -94,7 +122,7 @@ elif st.session_state.selected_tab == "💗 Likes / Dislikes":
                 <h3>👎 Dislikes</h3>
                 <ul>
                     <li style='font-size: 1.1rem;'>🐛 I don't like bugs.</li>
-                    <li style='font-size: 1.1rem;'>🔥 I don't like very hot weather.</li>
+                    <li style='font-size: 1.1rem;'>🔥 I don't like a very hot weather.</li>
                     <li style='font-size: 1.1rem;'>🛌 I don't like waking up early.</li>
                     <li style='font-size: 1.1rem;'>👩‍💼 I don't like presenting to a large audience.</li>
                     <li style='font-size: 1.1rem;'>🚃 I don’t like people who don't help in handing over money to the driver in jeepney rides.</li>
@@ -105,10 +133,41 @@ elif st.session_state.selected_tab == "💗 Likes / Dislikes":
         )
 elif st.session_state.selected_tab == "⭐ Skills":
     st.subheader("Skills")
-    st.write("Here you can add your skills.")
+    st.markdown(
+        """
+        <div style='display: flex; justify-content: center;'>
+            <iframe src="https://flo.uri.sh/visualisation/19252086/embed" 
+                    width="50%" 
+                    height="500" 
+                    style="border:none;margin-right: 300px" 
+                    scrolling="no">
+            </iframe>
+            <iframe src="https://flo.uri.sh/visualisation/19252332/embed" 
+                    width="50%" 
+                    height="500" 
+                    style="border:none;" 
+                    scrolling="no">
+            </iframe>
+        </div>
+        """,
+        unsafe_allow_html=True
+    )
+    
 elif st.session_state.selected_tab == "📚 Interests":
     st.subheader("Interests")
-    st.write("Here you can list your interests.")
+    st.markdown(
+        """
+        <div style='display: flex; justify-content: center;'>
+            <iframe src="https://flo.uri.sh/visualisation/19252499/embed" 
+                    width="100%" 
+                    height="1000" 
+                    style="border:none;" 
+                    scrolling="no">
+            </iframe>
+        </div>
+        """,
+        unsafe_allow_html=True
+    )
 elif st.session_state.selected_tab == "🎖️ Educational Activities":
     st.subheader("Educational Activities")
     # Create two columns for Certifications and Seminars & Workshops
